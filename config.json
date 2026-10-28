@@ -1,0 +1,7 @@
+{
+    "base_url": "http://127.0.0.1",
+    "base_folder":"/portfolio",
+    "components_folder":"Views/components/",
+    "controllers_folder":"Controllers/"
+
+}
