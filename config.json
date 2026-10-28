@@ -1,6 +1,6 @@
 {
-    "base_url": "http://127.0.0.1",
-    "base_folder":"/portfolio",
+    "base_url": "https://nicolas-martins.fr",
+    "base_folder":"",
     "components_folder":"Views/components/",
     "controllers_folder":"Controllers/"
 
