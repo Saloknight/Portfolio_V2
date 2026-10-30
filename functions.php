@@ -106,7 +106,7 @@ function sendmsg() {
         $mail->CharSet    = 'UTF-8';
 
         $mail->setFrom('contact@nicolas-martins.fr', 'Portfolio');
-        $mail->addAddress('contact@nicolas-martins.fr');
+        $mail->addAddress('nicolas.martins1912@gmail.com');
         $mail->addReplyTo($_POST['email']);
 
         $mail->isHTML(true);
