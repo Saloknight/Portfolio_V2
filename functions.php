@@ -1,10 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require __DIR__ . '/vendor/autoload.php';
-
 
 
 /**
@@ -88,6 +83,11 @@ function logout(){
 
 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/vendor/autoload.php';
+
 function sendmsg() {
     if (!isset($_POST['message'], $_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         return false;
@@ -103,11 +103,11 @@ function sendmsg() {
         $mail->Username   = getenv('SMTP_USER');
         $mail->Password   = getenv('SMTP_PASS');
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 465;
+        $mail->Port       = 587;
         $mail->CharSet    = 'UTF-8';
 
         $mail->setFrom('contact@nicolas-martins.fr', 'Portfolio');
-        $mail->addAddress('nicolas.martins1912@gmail.com');
+        $mail->addAddress('contact@nicolas-martins.fr');
         $mail->addReplyTo($_POST['email']);
 
         $mail->isHTML(true);
