@@ -87,7 +87,7 @@ function sendmsg(){
     if (isset($_POST['message']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $entete  = 'MIME-Version: 1.0' . "\r\n";
         $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $entete .= 'From: contact@nicolas-martins.mds-caen.yt' . "\r\n";
+        $entete .= 'From: contact@nicolas-martins.fr' . "\r\n";
         $entete .= 'Reply-to: ' . $_POST['email'];
 
         $message = '<h1>Message envoyé depuis la page Contact du Portfolio</h1>
