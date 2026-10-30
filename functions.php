@@ -98,7 +98,7 @@ function sendmsg(){
         <p><b>Objet : </b>' . $_POST['objet'] . '<br>
         <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
 
-        $retour = mail('nicolas.martins1912@gmail.com', 'Envoi depuis page Contact', $message, $entete);
+        $retour = mail('contact@nicolas-martins.fr', 'Envoi depuis page Contact', $message, $entete);
         
     }
 
