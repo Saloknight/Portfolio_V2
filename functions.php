@@ -1,5 +1,10 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/vendor/autoload.php';
+
 
 
 /**
@@ -82,10 +87,6 @@ function logout(){
 }
 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require __DIR__ . '/vendor/autoload.php';
 
 function sendmsg() {
     if (!isset($_POST['message'], $_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
