@@ -82,26 +82,48 @@ function logout(){
 }
 
 
-function sendmsg(){
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    if (isset($_POST['message']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $entete  = 'MIME-Version: 1.0' . "\r\n";
-        $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $entete .= 'From: contact@nicolas-martins.fr' . "\r\n";
-        $entete .= 'Reply-to: ' . $_POST['email'];
+require __DIR__ . '/vendor/autoload.php';
 
-        $message = '<h1>Message envoyé depuis la page Contact du Portfolio</h1>
-        <p><b>Nom : </b>' . $_POST['nom'] . '<br>
-        <p><b>Prenom : </b>' . $_POST['prenom'] . '<br>
-        <p><b>Email : </b>' . $_POST['email'] . '<br>
-        <p><b>Telephone : </b>' . $_POST['telephone'] . '<br>
-        <p><b>Objet : </b>' . $_POST['objet'] . '<br>
-        <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
-
-        $retour = mail('contact@nicolas-martins.fr', 'Envoi depuis page Contact', $message, $entete);
-        
+function sendmsg() {
+    if (!isset($_POST['message'], $_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        return false;
     }
 
+    $h = fn($k) => htmlspecialchars($_POST[$k] ?? '', ENT_QUOTES, 'UTF-8');
 
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'mail.infomaniak.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = getenv('SMTP_USER');
+        $mail->Password   = getenv('SMTP_PASS');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        $mail->CharSet    = 'UTF-8';
+
+        $mail->setFrom('contact@nicolas-martins.fr', 'Portfolio');
+        $mail->addAddress('contact@nicolas-martins.fr');
+        $mail->addReplyTo($_POST['email']);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Envoi depuis page Contact';
+        $mail->Body = '<h1>Message envoyé depuis la page Contact du Portfolio</h1>
+            <p><b>Nom : </b>' . $h('nom') . '<br>
+            <b>Prénom : </b>' . $h('prenom') . '<br>
+            <b>Email : </b>' . $h('email') . '<br>
+            <b>Téléphone : </b>' . $h('telephone') . '<br>
+            <b>Objet : </b>' . $h('objet') . '<br>
+            <b>Message : </b>' . nl2br($h('message')) . '</p>';
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log('Mail error: ' . $mail->ErrorInfo);
+        return false;
+    }
 }
 
