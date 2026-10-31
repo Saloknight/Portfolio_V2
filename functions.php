@@ -82,26 +82,73 @@ function logout(){
 }
 
 
-function sendmsg(){
 
-    if (isset($_POST['message']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $entete  = 'MIME-Version: 1.0' . "\r\n";
-        $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $entete .= 'From: contact@nicolas-martins.fr' . "\r\n";
-        $entete .= 'Reply-to: ' . $_POST['email'];
 
-        $message = '<h1>Message envoyé depuis la page Contact du Portfolio</h1>
-        <p><b>Nom : </b>' . $_POST['nom'] . '<br>
-        <p><b>Prenom : </b>' . $_POST['prenom'] . '<br>
-        <p><b>Email : </b>' . $_POST['email'] . '<br>
-        <p><b>Telephone : </b>' . $_POST['telephone'] . '<br>
-        <p><b>Objet : </b>' . $_POST['objet'] . '<br>
-        <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
 
-        $retour = mail('nicolas.martins1912@gmail.com', 'Envoi depuis page Contact', $message, $entete);
-        
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/vendor/autoload.php'; // adaptez le chemin selon l'emplacement du fichier
+
+function env_var(string $key): string {
+    $v = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+    return is_string($v) ? trim($v) : '';
+}
+
+function sendmsg(): bool {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST'
+        || empty($_POST['message'])
+        || empty($_POST['email'])
+        || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        return false;
     }
 
+    // Anti-spam : champ caché rempli uniquement par les robots
+    if (!empty($_POST['website'])) {
+        return false;
+    }
 
+    $user = env_var('SMTP_USER');
+    $pass = env_var('SMTP_PASS');
+    if ($user === '' || $pass === '') {
+        error_log('sendmsg: SMTP_USER ou SMTP_PASS vide');
+        return false;
+    }
+
+    $h = fn(string $k): string => htmlspecialchars(trim($_POST[$k] ?? ''), ENT_QUOTES, 'UTF-8');
+
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'mail.infomaniak.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $user;
+        $mail->Password   = $pass;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        $mail->CharSet    = 'UTF-8';
+        $mail->Timeout    = 15;
+
+        $mail->setFrom($user, 'Portfolio');               // la boîte authentifiée
+        $mail->addAddress('nicolas.martins1912@gmail.com'); // destinataire
+        $mail->addReplyTo($_POST['email'], trim(($_POST['prenom'] ?? '') . ' ' . ($_POST['nom'] ?? '')));
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Portfolio : ' . mb_substr(trim($_POST['objet'] ?? 'Nouveau message'), 0, 100);
+        $mail->Body =
+            '<h1>Message envoyé depuis la page Contact du Portfolio</h1>' .
+            '<p><b>Nom : </b>' . $h('nom') . '<br>' .
+            '<b>Prénom : </b>' . $h('prenom') . '<br>' .
+            '<b>Email : </b>' . $h('email') . '<br>' .
+            '<b>Téléphone : </b>' . $h('telephone') . '<br>' .
+            '<b>Objet : </b>' . $h('objet') . '</p>' .
+            '<p><b>Message :</b><br>' . nl2br($h('message')) . '</p>';
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log('Mail error: ' . $mail->ErrorInfo);
+        return false;
+    }
 }
 
