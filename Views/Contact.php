@@ -5,6 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultat = sendmsg(); // true ou false
 }
 ?>
+<?php if ($resultat === true): ?>
+    <p class="msg-ok">✅ Merci, votre message a bien été envoyé.</p>
+<?php elseif ($resultat === false): ?>
+    <p class="msg-erreur">❌ Une erreur est survenue, merci de réessayer plus tard.</p>
+<?php endif; ?>
+
 <section class="contact">
     <div class="container">
         <h2 class="titre">Contactez-moi</h2>
