@@ -83,43 +83,70 @@ function logout(){
 
 
 
+<?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/vendor/autoload.php';
 
-function sendmsg() {
-    error_log('sendmsg appelée : ' . json_encode(array_keys($_POST)));
-    if (!isset($_POST['message'], $_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+function env_var(string $key): string {
+    $v = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+    return is_string($v) ? trim($v) : '';
+}
+
+function sendmsg(): bool {
+    // Seulement sur POST avec les champs obligatoires
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST'
+        || empty($_POST['message'])
+        || empty($_POST['email'])
+        || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         return false;
     }
 
-    $h = fn($k) => htmlspecialchars($_POST[$k] ?? '', ENT_QUOTES, 'UTF-8');
+    // Anti-spam : champ caché "website" que seuls les robots remplissent
+    if (!empty($_POST['website'])) {
+        return false;
+    }
+
+    $user = env_var('SMTP_USER');
+    $pass = env_var('SMTP_PASS');
+
+    if ($user === '' || $pass === '') {
+        error_log('sendmsg: SMTP_USER ou SMTP_PASS vide (variables non transmises au conteneur)');
+        return false;
+    }
+
+    // Échappement de tous les champs (évite l'injection HTML)
+    $h = fn(string $k): string => htmlspecialchars(trim($_POST[$k] ?? ''), ENT_QUOTES, 'UTF-8');
 
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
         $mail->Host       = 'mail.infomaniak.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('SMTP_USER');
-        $mail->Password   = getenv('SMTP_PASS');
+        $mail->Username   = $user;
+        $mail->Password   = $pass;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet    = 'UTF-8';
+        $mail->Timeout    = 15;
 
-        $mail->setFrom('contact@nicolas-martins.fr', 'Portfolio');
-        $mail->addAddress('contact@nicolas-martins.fr');
-        $mail->addReplyTo($_POST['email']);
+        // Expéditeur = la boîte authentifiée (sinon Infomaniak refuse)
+        $mail->setFrom($user, 'Portfolio');
+        $mail->addAddress($user);
+        $mail->addReplyTo($_POST['email'], trim(($_POST['prenom'] ?? '') . ' ' . ($_POST['nom'] ?? '')));
 
         $mail->isHTML(true);
-        $mail->Subject = 'Envoi depuis page Contact';
-        $mail->Body = '<h1>Message envoyé depuis la page Contact du Portfolio</h1>
-            <p><b>Nom : </b>' . $h('nom') . '<br>
-            <b>Prénom : </b>' . $h('prenom') . '<br>
-            <b>Email : </b>' . $h('email') . '<br>
-            <b>Téléphone : </b>' . $h('telephone') . '<br>
-            <b>Objet : </b>' . $h('objet') . '<br>
-            <b>Message : </b>' . nl2br($h('message')) . '</p>';
+        $mail->Subject = 'Portfolio : ' . mb_substr(trim($_POST['objet'] ?? 'Nouveau message'), 0, 100);
+        $mail->Body =
+            '<h1>Message envoyé depuis la page Contact du Portfolio</h1>' .
+            '<p><b>Nom : </b>' . $h('nom') . '<br>' .
+            '<b>Prénom : </b>' . $h('prenom') . '<br>' .
+            '<b>Email : </b>' . $h('email') . '<br>' .
+            '<b>Téléphone : </b>' . $h('telephone') . '<br>' .
+            '<b>Objet : </b>' . $h('objet') . '</p>' .
+            '<p><b>Message :</b><br>' . nl2br($h('message')) . '</p>';
+        $mail->AltBody = strip_tags(str_replace('<br>', "\n", $mail->Body));
 
         $mail->send();
         return true;
