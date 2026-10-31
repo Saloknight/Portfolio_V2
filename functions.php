@@ -131,8 +131,8 @@ function sendmsg(): bool {
         $mail->Timeout    = 15;
 
         // Expéditeur = la boîte authentifiée (sinon Infomaniak refuse)
-        $mail->setFrom($user, 'Portfolio');
-        $mail->addAddress($user);
+        $mail->setFrom($user, 'Portfolio');          // doit être la boîte authentifiée
+        $mail->addAddress('contact@nicolas-martins.fr'); // la redirection reçoit le message
         $mail->addReplyTo($_POST['email'], trim(($_POST['prenom'] ?? '') . ' ' . ($_POST['nom'] ?? '')));
 
         $mail->isHTML(true);
