@@ -1,5 +1,9 @@
 <?php
-sendmsg()
+$resultat = null; // null = formulaire pas encore envoyé
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $resultat = sendmsg(); // true ou false
+}
 ?>
 <section class="contact">
     <div class="container">
