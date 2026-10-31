@@ -4,6 +4,15 @@ $resultat = null; // null = formulaire pas encore envoyé
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultat = sendmsg(); // true ou false
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $ok = sendmsg();
+    header('Location: /Contact?envoi=' . ($ok ? 'ok' : 'erreur'));
+    exit;
+}
+
+$etat = $_GET['envoi'] ?? null;
+
 ?>
 <?php if ($resultat === true): ?>
     <p class="msg-ok">✅ Merci, votre message a bien été envoyé.</p>
