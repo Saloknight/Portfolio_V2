@@ -89,6 +89,7 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/vendor/autoload.php';
 
 function sendmsg() {
+    error_log('sendmsg appelée : ' . json_encode(array_keys($_POST)));
     if (!isset($_POST['message'], $_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         return false;
     }
