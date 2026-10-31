@@ -22,6 +22,9 @@
     font-display: swap;
 }
 
+.msg-ok { color: #1a7f37; font-weight: bold; }
+.msg-erreur { color: #b42318; font-weight: bold; }
+
 html {
     font-size: var(--base-px);
 
