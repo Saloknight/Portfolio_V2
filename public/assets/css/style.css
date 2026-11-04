@@ -70,6 +70,7 @@ header{
     padding-block: 2rem;
     padding-inline: 3rem;
     border-radius: 100rem;
+    border: solid var(--Deep-Red) 1px;
 
     background-color: var(--Deep-Red);
   }
