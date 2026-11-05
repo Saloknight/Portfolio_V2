@@ -49,26 +49,52 @@ li {
   margin: 0;
 }
 
+h1{
+  font-size: 8.8rem;
+  font-weight: 800;
+}
+
+h2{
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+h3{
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+p{
+  font-size: 1.8rem;
+}
+
 /* HEADER ***********************************************************/
 header{
+  width: 100%;
   height: 12.8rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   justify-content: space-between;
   align-items: center;
   padding-inline: 5rem;
+
+  transition: ease 1s;
   
 
   img{
-    width: 96px;
+    width: 5.6rem;
     height: auto;
+    transition: ease-in-out .5s;
   }
 
   nav{
     font-size: 1.8rem;
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 3rem;
     padding-block: 2rem;
     padding-inline: 4rem;
     border-radius: 100rem;
@@ -76,26 +102,28 @@ header{
 
     background-color: var(--Deep-Red);
 
+    transition: ease-in-out .5s;
+
     a{
-      padding-inline: 2rem;
-      padding-block: 1rem;
-      transition: ease 1s;
+      transition: ease .5s;
     }
 
     a:hover{
-      background-color: var(--Red);
-      border-radius: 10rem;
-      transition: ease-in-out .5s;
+      color: var(--Red);
+      font-weight: 800;
+      font-size: 110%;
       
     }
   }
 }
+
 
 .header-btn{
   justify-self: end;
   display: flex;
   flex-direction: row;
   gap: 3rem;
+
 }
 
 .btn-black{
@@ -103,6 +131,7 @@ header{
   padding-block: 1.5rem;
   border: 1px solid var(--White);
   border-radius: 8px;
+  transition: ease-in-out .5s;
 }
 
 .btn-red{
@@ -112,12 +141,74 @@ header{
   padding-block: 1.5rem;
   background-color: var(--Red);
   border-radius: 8px;
+  transition: ease-in-out .5s;
+}
+
+header.scrolled{
+
+  height: 7.2rem;
+  margin-bottom: 5.2rem;
+  background-color: rgb(from var(--Deep-Red) r g b / 80%);
+  border-bottom: solid 1px var(--Red);
+
+  nav{
+    background-color: transparent;
+    border: transparent;
+  }
+
+  .btn-black{
+    padding-inline: 2rem;
+    padding-block: 1rem;
+  }
+
+  .btn-red{
+
+    padding-inline: 2rem;
+    padding-block: 1rem;
+
+  }
 }
 
 /* MAIN *************************************************************/
 
 /* SECTION ********************************************************/
+.hero{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  gap: 2rem;
 
+
+
+  img{
+    width: 9.6rem;
+    height: auto;
+  }
+
+  h3{
+    color: var(--Grey);
+    font-weight: 500;
+    width: 72rem;
+    text-align: center;
+  }
+
+  .sous-titre{
+    color: var(--Red);
+    font-size: 1.4rem;
+  }
+
+  .btns{
+    display: flex;
+    gap: 2rem;
+
+    a{
+      border-radius: inherit;
+    }
+  }
+
+}
 /* FOOTER ***********************************************************/
 
 /* GRID *************************************************************/
