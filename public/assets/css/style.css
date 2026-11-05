@@ -21,10 +21,8 @@
 
 @font-face {
   font-family: "Chakra Petch";
-  src:
-    local("Chakra"),
-    url("../fonts/ChakraPetch-Regular.woff2") format("woff2"),
-    url("../fonts/ChakraPetch-Regular.woff") format("woff");
+  src:url("../fonts/ChakraPetch-Regular.woff2") format("woff2"),
+      url("../fonts/ChakraPetch-Regular.woff") format("woff");
 }
 
 html {
