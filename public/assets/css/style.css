@@ -23,8 +23,8 @@
   font-family: "Chakra Petch";
   src:
     local("Chakra"),
-    url("/public/assets/fonts/ChakraPetch-Regular.woff2") format("woff2"),
-    url("/public/assets/fonts/ChakraPetch-Regular.woff") format("woff");
+    url("/assets/fonts/ChakraPetch-Regular.woff2") format("woff2"),
+    url("/assets/fonts/ChakraPetch-Regular.woff") format("woff");
 }
 
 html {
