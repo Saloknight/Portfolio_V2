@@ -264,8 +264,46 @@ header.scrolled{
   flex-direction: column;
   gap: 1rem;
 
+  p:not(:first-child){
+    font-size: 1.6rem;
+  }
+}
+
+/* SECTION PROJETS ********************************************************/
+
+.projets{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  
+  .section-title{
+    padding-bottom: 3rem;
+  }
+
   p{
     font-size: 1.6rem;
+  }
+
+  a{
+    color: var(--Red);
+  }
+}
+
+.projet-divs{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  border-block: 1px solid rgb(from var(--Grey) r g b / 20%);
+  padding-block: 3rem;
+
+  .infos-prjt{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 
