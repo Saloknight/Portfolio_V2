@@ -70,10 +70,11 @@ p{
 section{
   width: 96rem;
   margin: 0 auto;
+  
 }
 
 section:not(:first-child){
-  padding-block: 3rem;
+  padding-block: 3rem 15rem;
   border-top: 1px solid rgb(from var(--Grey) r g b / 20%);
 }
 
@@ -91,6 +92,10 @@ section:not(:first-child){
 
 .red{
   color: var(--Red);
+}
+
+.section-title{
+  padding-bottom: 2rem;
 }
 
 /* HEADER ***********************************************************/
@@ -207,7 +212,7 @@ header.scrolled{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 90vh;
   gap: 2rem;
 
 
@@ -253,7 +258,7 @@ header.scrolled{
 
   .sous-titre-grey{
 
-    width: 20%;
+    width: 25%;
   }
 }
 
@@ -277,10 +282,6 @@ header.scrolled{
   align-items: center;
   flex-direction: column;
   
-  
-  .section-title{
-    padding-bottom: 3rem;
-  }
 
   p{
     font-size: 1.6rem;
@@ -306,6 +307,61 @@ header.scrolled{
     gap: 1rem;
   }
 }
+
+
+/* SECTION COMPETENCES ********************************************************/
+
+.competences{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+
+
+}
+
+.domains{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 30rem;
+}
+
+.skills{
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 3rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgb(from var(--Grey) r g b / 20%);
+
+
+  div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  p{
+    font-size: 1.2rem;
+  }
+  
+}
+
+.skills:first-child{
+  border-top: 1px solid rgb(from var(--Grey) r g b / 20%);
+}
+
+.skills:nth-child(5){
+  border-top: 1px solid rgb(from var(--Grey) r g b / 20%);
+}
+
 
 /* FOOTER ***********************************************************/
 
