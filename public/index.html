@@ -202,6 +202,59 @@
         </div>
 
     </section>
+    <section class="contact">
+        <div class="section-title">
+            <p class="sous-titre">04</p>
+            <h2>Contact</h2>
+        </div>
+        <p>N’hésitez pas à me contacter, je vous répondrai dans les plus brefs délais.</p>
+        <form action="Contact" method="POST" class="row form">
+
+            <div class="small-form">
+                <label>Nom*</label>
+                <input required name="nom" type="text" placeholder="Nom">
+            </div>
+
+            <div class="small-form">
+                <label>Prénom*</label>
+                <input required name="prenom" type="text" placeholder="Prenom">
+            </div>
+
+            <div class="small-form">
+                <label>Mail*</label>
+                <input required name="email" type="email" placeholder="votre-mail@gmail.com">
+            </div>
+
+            <div class="small-form">
+                <label>Téléphone</label>
+                <input name="telephone" type="tel" placeholder="06 06 06 06 06">
+            </div>
+            
+            <div class="bif-form">
+                <label>Objet*</label>
+                <input required name="objet" type="text">
+            </div>
+
+            <div class="bif-form ">
+                <label>Message*</label>
+                <textarea required name="message"></textarea>
+            </div>
+
+            <div class="col-12">* Champs obligatoire</div>
+
+            <div class="check col-12">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">
+                    J'accepte que mes données soient traitées pour répondre à ma demande. 
+                    <a href="<?= homeUrl()?>Politique">En savoir plus</a>.
+                </label>
+            </div>
+
+            <div class="col-12 submit">
+                <button type="submit" class="send">Envoyer</button>
+            </div>
+        </form>
+    </section>
 
 
 </body>

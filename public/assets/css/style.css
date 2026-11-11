@@ -362,6 +362,31 @@ header.scrolled{
   border-top: 1px solid rgb(from var(--Grey) r g b / 20%);
 }
 
+/* SECTION CONTACT ********************************************************/
+.contact{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  div{
+    width: 50%;
+  }
+  .small-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 /* FOOTER ***********************************************************/
 
