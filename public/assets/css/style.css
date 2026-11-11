@@ -78,6 +78,13 @@ section:not(:first-child){
   border-top: 1px solid rgb(from var(--Grey) r g b / 20%);
 }
 
+input,
+textarea{
+  color: var(--White);
+  font-family: "Chakra Petch", sans-serif;
+
+}
+
 .sous-titre{
   color: var(--Red);
   font-size: 1.4rem;
@@ -363,32 +370,88 @@ header.scrolled{
 }
 
 /* SECTION CONTACT ********************************************************/
-.contact{
+.contact {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+
+  p:nth-child(2){
+    margin-bottom: 4rem;
+  }
+
 }
 
-.form{
-  width: 100%;
+.contact form {
+  width: 80%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
 
   div{
-    width: 50%;
+    gap: 1rem;
   }
-  .small-form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+}
+
+.small-form {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+
+  input{
+      padding: 1.5rem;
+      background-color: transparent;
+      border: 1px solid rgb(from var(--Grey) r g b / 20%);
   }
+}
+
+.big-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  input{
+      padding: 1.5rem;
+      background-color: transparent;
+      border: 1px solid rgb(from var(--Grey) r g b / 20%);
+  }
+
+  textarea{
+      padding: 1.5rem;
+      min-height: 20rem;
+      background-color: transparent;
+      border: 1px solid rgb(from var(--Grey) r g b / 20%);
+  }
+}
+
+
+.check{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
+}
+
+.send{
+  width: auto;
+  padding: 1.5rem 2rem;
+  font-weight: 900;
+  background-color: var(--Red);
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.send:hover{
+  cursor: pointer;
 }
 
 /* FOOTER ***********************************************************/
+
+footer{
+  padding-bottom: 5rem;
+  text-align: center;
+}
 
 /* GRID *************************************************************/
 

@@ -230,31 +230,36 @@
                 <input name="telephone" type="tel" placeholder="06 06 06 06 06">
             </div>
             
-            <div class="bif-form">
+            <div class="big-form">
                 <label>Objet*</label>
-                <input required name="objet" type="text">
+                <input required name="objet" type="text" placeholder="Objet de votre message">
             </div>
 
-            <div class="bif-form ">
+            <div class="big-form ">
                 <label>Message*</label>
                 <textarea required name="message"></textarea>
             </div>
 
-            <div class="col-12">* Champs obligatoire</div>
+            <div class="big-form sous-titre-grey">* Champs obligatoire</div>
 
-            <div class="check col-12">
+            <div class="check big-form">
                 <input type="checkbox" id="consent" name="consent" required>
                 <label for="consent">
-                    J'accepte que mes données soient traitées pour répondre à ma demande. 
-                    <a href="<?= homeUrl()?>Politique">En savoir plus</a>.
+                    J'accepte que mes données soient traitées pour répondre à ma demande.
+                    <a href="Politique">En savoir plus</a>.
                 </label>
             </div>
 
-            <div class="col-12 submit">
+            <div class=" submit">
                 <button type="submit" class="send">Envoyer</button>
             </div>
         </form>
     </section>
+
+
+    <footer>
+        <p class="sous-titre-grey">© 2026 Nicolas Martins. Tous droits réservés</p>
+    </footer>
 
 
 </body>
