@@ -284,6 +284,7 @@ header.scrolled{
 
   .sous-titre-grey{
 
+
     width: 25%;
   }
 }
@@ -314,6 +315,7 @@ header.scrolled{
   }
 
   a{
+    margin-left: 1rem;
     color: var(--Red);
   }
 }
@@ -593,7 +595,7 @@ footer{
 section{
   
   max-width: 95%;
-  padding-inline: 3rem;
+  padding-inline: 1.5rem;
   margin: 0 auto;
   
 }
@@ -826,6 +828,18 @@ header nav {
         transform: rotate(-45deg);
         top: 18px;
     }
+
+  .profil-divs{
+    width: 100%;
+    display: flex;
+    text-align: start;
+
+    .sous-titre-grey{
+      
+      margin-right: 1rem;
+      width: 25%;
+    }
+  }
 
 }
 
