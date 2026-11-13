@@ -7,3 +7,14 @@ window.onscroll = function() {
         header.classList.remove("scrolled");
     }
 };
+
+
+
+ const hbg = document.querySelector('.hbg');
+    const header = document.querySelector('header');
+
+    hbg.addEventListener('click', function (e) {
+        e.preventDefault();
+        hbg.classList.toggle('open');
+        header.classList.toggle('open');
+    });
