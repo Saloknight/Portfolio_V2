@@ -810,6 +810,7 @@ header nav {
     opacity: 1;
     transform: translateY(0);
     width: 100%;
+    padding-top: 10rem;
 
     li{
       width: 100%;
@@ -818,7 +819,7 @@ header nav {
 
     li:first-child{
       width: 100%;
-      padding-top: 6rem;
+      border-top: 1px solid rgb(from var(--Grey) r g b / 80%);
     }
 
     a{
@@ -831,6 +832,7 @@ header nav {
       font-size: 1.8rem;
       font-weight: 800;
       width: 100%;
+      text-align: center;
     }
   }
 
@@ -922,6 +924,11 @@ header nav {
   .submit,
   .send{
     width: 100%;
+  }
+
+
+  .btn-git{
+    display: none;
   }
 
 }
