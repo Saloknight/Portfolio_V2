@@ -232,6 +232,9 @@ header.scrolled{
     padding-block: 1rem;
 
   }
+  .nav-git{
+    display: none;
+    }
 }
 
 /* MAIN *************************************************************/
