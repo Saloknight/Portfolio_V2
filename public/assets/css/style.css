@@ -810,7 +810,7 @@ header nav {
     opacity: 1;
     transform: translateY(0);
     width: 100%;
-    padding-top: 10rem;
+    padding-block: 10rem 5rem;
 
     li{
       width: 100%;
