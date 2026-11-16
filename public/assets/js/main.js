@@ -9,12 +9,14 @@ window.onscroll = function() {
 };
 
 
-
+const git = document.querySelector('.nav-git');
  const hbg = document.querySelector('.hbg');
     const header = document.querySelector('header');
+    
 
     hbg.addEventListener('click', function (e) {
         e.preventDefault();
         hbg.classList.toggle('open');
         header.classList.toggle('open');
+        git.classList.toggle('hidden');
     });
