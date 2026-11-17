@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  require_once __DIR__ . '/../src/functions.php';
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +21,11 @@
 <header>
     <img src="assets/img/PP.svg" alt="Logo Saloknight SVG">
     <nav alt="navigation">
-        <li><a href="" alt="Boutton Acceuil">Acceuil</a></li>
-        <li><a href=""alt="Boutton Profil">Profil</a></li>
-        <li><a href=""alt="Boutton Projets">Projets</a></li>
-        <li><a href=""alt="Boutton Compétences">Compétences</a></li>
-        <li><a href=""alt="Boutton Contact">Contact</a></li>
+        <li><a href="#Acceuil" alt="Boutton Acceuil">Acceuil</a></li>
+        <li><a href="#Profil"alt="Boutton Profil">Profil</a></li>
+        <li><a href="#Projets"alt="Boutton Projets">Projets</a></li>
+        <li><a href="#Competences"alt="Boutton Compétences">Compétences</a></li>
+        <li><a href="#Contact"alt="Boutton Contact">Contact</a></li>
         <a class="btn-red nav-git hidden" href="https://github.com/Saloknight/" target="_blank" alt="Boutton Github">Github</a>
     </nav>
     <div class="header-btn">
@@ -29,7 +39,7 @@
 </header>
 <body>
 
-    <secttion class="hero">
+    <secttion class="hero" id="Acceuil">
         <img src="assets/img/PP.svg" alt="Logo Saloknight">
         <p class="sous-titre">Développeur web · alias saloknight</p>
         <h1>Nicolas Martins</h1>
@@ -41,7 +51,7 @@
         </div>
     </secttion>
 
-    <section class="profil">
+    <section class="profil" id="Profil">
         <div class="section-title">
             <p class="sous-titre">01</p>
             <h2>Profil</h2>
@@ -52,7 +62,7 @@
                     Étudiant en Bachelor Développement Web, je recherche une alternance pour mettre mes compétences en développement back-end au service d'une entreprise. Toujours curieux d'apprendre de nouvelles méthodes de programmation et de faire évoluer mes pratiques, mon objectif est de concevoir des applications fiables et performantes tout en me formant aux enjeux de demain.
                 </p>
         </div>
-        <div class="profil-divs">
+        <div class="profil-divs" >
             <p class="sous-titre-grey">En cours</p>
             <div class="experiences">
                 <h3>Bachelor Informatique</h3>
@@ -113,7 +123,7 @@
             </div>
         </div>
     </section>
-    <section class="projets">
+    <section class="projets" id="Projets">
         <div class="section-title">
             <p class="sous-titre">02</p>
             <h2>Projets</h2>
@@ -140,7 +150,7 @@
             <a href="https://github.com/Saloknightt/Tp_dev_front_B1" target="_blank">Github →</a>
         </div>
     </section>
-    <section class="competences">
+    <section class="competences" id="Competences">
         <div class="section-title">
             <p class="sous-titre">03</p>
             <h2>Compétences</h2>
@@ -205,13 +215,15 @@
         </div>
 
     </section>
-    <section class="contact">
+    <section class="contact" id="Contact">
         <div class="section-title">
             <p class="sous-titre">04</p>
             <h2>Contact</h2>
         </div>
         <p>N’hésitez pas à me contacter, je vous répondrai dans les plus brefs délais.</p>
-        <form action="Contact" method="POST" class="row form">
+        <?= contact_status_markup() ?>
+        <form action="contact.php" method="POST" class="row form">
+            <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" hidden>
 
             <div class="small-form">
                 <label>Nom*</label>
