@@ -1,13 +1,3 @@
-<?php
-  session_start();
-  require_once __DIR__ . '/../src/functions.php';
-
-
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,9 +211,7 @@
             <h2>Contact</h2>
         </div>
         <p>N’hésitez pas à me contacter, je vous répondrai dans les plus brefs délais.</p>
-        <?= contact_status_markup() ?>
-        <form action="contact.php" method="POST" class="row form">
-            <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" hidden>
+        <form action="Contact" method="POST" class="row form">
 
             <div class="small-form">
                 <label>Nom*</label>
